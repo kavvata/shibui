@@ -689,6 +689,21 @@ details[open] > .toc-title::before {
   }
 }
 
+hr {
+  border: none;
+}
+
+hr::after {
+  content: "\2042";
+  display: block;
+  font-family: serif;
+  font-weight: 200;
+  font-size: 1.5em;
+  margin-block: 1em;
+  margin-inline: auto;
+  text-align: center;
+}
+
 /* Print styles */
 @media print {
   body {
