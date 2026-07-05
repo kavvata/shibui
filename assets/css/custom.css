@@ -29,7 +29,7 @@
 }
 
 .toc-content a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -41,4 +41,9 @@
 
 .toc-content a:hover::after {
   width: 100%;
+}
+
+@font-face {
+  font-family: "Iosevka Slab";
+  src: url("/fonts/iosevka-slab-web.woff2") format("woff2");
 }
