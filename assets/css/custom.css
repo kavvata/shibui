@@ -23,26 +23,6 @@
   opacity: 0.7;
 }
 
-/* Smooth transitions for links in TOC */
-.toc-content a {
-  position: relative;
-}
-
-.toc-content a::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--color-text-primary);
-  transition: width 0.2s ease-in-out;
-}
-
-.toc-content a:hover::after {
-  width: 100%;
-}
-
 @font-face {
   font-family: "Iosevka Slab";
   src: url("/fonts/iosevka-slab-web.woff2") format("woff2");
