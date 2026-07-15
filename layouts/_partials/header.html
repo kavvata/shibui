@@ -1,8 +1,31 @@
-<nav class="path-nav" aria-label="Breadcrumb">
-  <ol>
-    {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
-  </ol>
-</nav>
+<div class="header-wrapper">
+  {{ if hugo.IsMultilingual }}
+  <nav class="lang-nav" aria-label="Language selector">
+    <ul>
+      {{ range $.Site.Languages }}
+        {{ if eq . $.Site.Language }}
+          <li aria-current="true"><span>{{ .LanguageName }}</span></li>
+        {{ else }}
+          {{ $lang := . }}
+          {{ $translatedPage := where $.AllTranslations "Lang" $lang.Lang | first 1 }}
+          <li>
+            {{ with $translatedPage }}
+              <a href="{{ (index . 0).RelPermalink }}">{{ (index . 0).Language.LanguageName }}</a>
+            {{ else }}
+              <a href="{{ $.Site.Home.RelPermalink }}">{{ $lang.LanguageName }}</a>
+            {{ end }}
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </nav>
+  {{ end }}
+  <nav class="path-nav" aria-label="Breadcrumb">
+    <ol>
+      {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
+    </ol>
+  </nav>
+</div>
 
 {{ define "breadcrumbnav" }}
   {{ if .p1.Parent }}
