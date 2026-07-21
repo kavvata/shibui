@@ -3,21 +3,17 @@
   <nav class="lang-nav" aria-label="Language selector">
     <ul>
       {{ range $.Site.Languages }}
-        {{ if eq .Lang $.Language.Lang }}
+        {{ if eq . $.Site.Language }}
           <li aria-current="true"><span>{{ .LanguageName }}</span></li>
         {{ else }}
-          {{ $switchLink := "" }}
-          {{ if $.IsTranslated }}
-            {{ range $.Translations }}
-              {{ if eq .Language.Lang $.Lang }}
-                {{ $switchLink = .RelPermalink }}
-              {{ end }}
-            {{ end }}
-          {{ end }}
+          {{ $lang := . }}
+          {{ $translatedPage := where $.AllTranslations "Lang" $lang.Lang | first 1 }}
           <li>
-            <a href="{{ if $switchLink }}{{ $switchLink }}{{ else }}{{ $.Site.Home.RelPermalink }}{{ end }}">
-              {{ .LanguageName }}
-            </a>
+            {{ with $translatedPage }}
+              <a href="{{ (index . 0).RelPermalink }}">{{ (index . 0).Language.LanguageName }}</a>
+            {{ else }}
+              <a href="{{ $.Site.Home.RelPermalink }}">{{ $lang.LanguageName }}</a>
+            {{ end }}
           </li>
         {{ end }}
       {{ end }}
