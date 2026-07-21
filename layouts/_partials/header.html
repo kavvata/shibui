@@ -2,16 +2,17 @@
   {{ if hugo.IsMultilingual }}
   <nav class="lang-nav" aria-label="Language selector">
     <ul>
-      {{ range hugo.Sites }}
-        {{ if eq .Language site.Language }}
-          <li aria-current="true"><span>{{ .Language.LanguageName }}</span></li>
+      {{ range $.Site.Languages }}
+        {{ if eq . $.Site.Language }}
+          <li aria-current="true"><span>{{ .LanguageName }}</span></li>
         {{ else }}
-          {{ $translatedPage := where $.AllTranslations "Lang" .Language.Lang | first 1 }}
+          {{ $lang := . }}
+          {{ $translatedPage := where $.AllTranslations "Lang" $lang.Lang | first 1 }}
           <li>
             {{ with $translatedPage }}
               <a href="{{ (index . 0).RelPermalink }}">{{ (index . 0).Language.LanguageName }}</a>
             {{ else }}
-              <a href="{{ .Home.RelPermalink }}">{{ .Language.LanguageName }}</a>
+              <a href="{{ $.Site.Home.RelPermalink }}">{{ $lang.LanguageName }}</a>
             {{ end }}
           </li>
         {{ end }}
