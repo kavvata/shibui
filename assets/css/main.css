@@ -704,12 +704,12 @@ details[open] > .toc-title::before {
     max-width: 100px; /* More aggressive truncation on mobile */
   }
 
-  .path-nav li:first-child {
-    max-width: none; /* Don't truncate site title */
-  }
-
   .path-nav li.current {
     max-width: 150px; /* Allow slightly more width for current page on mobile */
+  }
+
+  .path-nav li:first-child {
+    max-width: none; /* Don't truncate site title */
   }
 }
 
